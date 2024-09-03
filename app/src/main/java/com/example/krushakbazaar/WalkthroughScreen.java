@@ -133,7 +133,7 @@ public class WalkthroughScreen extends AppCompatActivity {
     private boolean checkPermissions() {
         int resultSendSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
         int resultReadSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS);
-        int resultCallPhone = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        int resultCallPhone = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         int resultCamera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int resultRecordAudio = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
         int resultInternet = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
@@ -146,14 +146,14 @@ public class WalkthroughScreen extends AppCompatActivity {
                 resultInternet == PackageManager.PERMISSION_GRANTED;
     }
 
+
     private void requestPermissions() {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.READ_SMS,
-                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.CALL_PHONE,
                 Manifest.permission.CAMERA,
                 Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.INTERNET
         }, PERMISSION_REQUEST_CODE);
     }
 
@@ -169,23 +169,21 @@ public class WalkthroughScreen extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0) {
+            if (grantResults.length == 5) {
                 boolean sendSMS = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 boolean readSMS = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                 boolean callPhone = grantResults[2] == PackageManager.PERMISSION_GRANTED;
                 boolean camera = grantResults[3] == PackageManager.PERMISSION_GRANTED;
                 boolean recordAudio = grantResults[4] == PackageManager.PERMISSION_GRANTED;
-                boolean internet = grantResults[5] == PackageManager.PERMISSION_GRANTED;
 
-                if (sendSMS && readSMS && callPhone && camera && recordAudio && internet) {
+                if (sendSMS && readSMS && callPhone && camera && recordAudio) {
                     proceedToNextActivity();
                 } else {
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS) ||
                             !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_SMS) ||
-                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE) ||
+                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE) ||
                             !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA) ||
-                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO) ||
-                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.INTERNET)) {
+                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
                         showSettingsDialog();
                     } else {
                         MotionToast.Companion.createColorToast(WalkthroughScreen.this,
@@ -196,6 +194,13 @@ public class WalkthroughScreen extends AppCompatActivity {
                                 ResourcesCompat.getFont(WalkthroughScreen.this, R.font.montserrat_semibold));
                     }
                 }
+            } else {
+                MotionToast.Companion.createColorToast(WalkthroughScreen.this,
+                        "Permissions Error", "Unexpected number of permissions results",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(WalkthroughScreen.this, R.font.montserrat_semibold));
             }
         }
     }
@@ -220,8 +225,9 @@ public class WalkthroughScreen extends AppCompatActivity {
     }
 
     private void proceedToNextActivity() {
-        Intent intent = new Intent(WalkthroughScreen.this, MainActivity.class);
+        Intent intent = new Intent(WalkthroughScreen.this, IndexPage.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
     }
 }
