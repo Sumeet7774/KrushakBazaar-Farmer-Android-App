@@ -23,5 +23,17 @@
     <string name="index_heading1">NAMASTE</string>
     <string name="index_heading2">WELCOME USER</string>
 
+    <string name="signup_heading0">SIGN UP</string>
+    <string name="signup_heading_farmer1">Hello Farmer,</string>
+    <string name="signup_heading2">Please Sign</string>
+    <string name="signup_heading3">Up</string>
+    <string name="signup_heading_consumer1">Hello Consumer,</string>
+
+    <string name="signup_for_farmer">SIGN UP FOR FARMER</string>
+    <string name="signup_for_consumer">SIGN UP FOR CONSUMER</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
 
 </resources>

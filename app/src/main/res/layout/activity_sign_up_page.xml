@@ -1,10 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/signupPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EEEEEE"
     tools:context=".SignUpPage">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_20sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/signuppage_topbackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:src="@drawable/top_background"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/signupAnimationView_signuppage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_230sdp"
+                android:layout_below="@id/signuppage_topbackground"
+                app:lottie_rawRes="@raw/signup"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
+
+            <LinearLayout
+                android:id="@+id/back_button_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp">
+
+                <Button
+                    android:id="@+id/back_button_signuppage"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/ic_arrow_back_black"
+                    android:tint="#000000"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/signuppage_top_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/back_button_container"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/signup_heading0"
+                android:textColor="#EEEEEE"
+                android:textSize="@dimen/_25sdp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <Button
+                android:id="@+id/signup_for_farmer_button_signuppage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/signup_for_farmer"
+                android:textColor="#EEEEEE"
+                android:textSize="@dimen/_20sdp"
+                android:background="@drawable/rounded_button"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/signup_for_consumer_button_signuppage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/signup_for_farmer_button_signuppage"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/signup_for_consumer"
+                android:textColor="#EEEEEE"
+                android:textSize="@dimen/_20sdp"
+                android:background="@drawable/rounded_button"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
