@@ -41,4 +41,6 @@ dependencies {
     implementation libs.sdp.android
     implementation libs.motiontoast
     implementation libs.volley
+    implementation libs.lottie
+
 }
