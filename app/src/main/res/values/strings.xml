@@ -42,4 +42,14 @@
     <string name="login_for_consumer">LOGIN FOR CONSUMER</string>
     <string name="enter_your_address">Enter your address</string>
 
+    <string name="login_govt_heading0_govtofficial">Hello Officer,</string>
+    <string name="login_govt_heading1_govtofficial">Please Login</string>
+
+    <string name="login_heading1_farmers">Hello Farmer,</string>
+    <string name="login_heading2_farmers">Please Login</string>
+
+    <string name="login_heading1_consumers">Hello Consumer,</string>
+    <string name="login_heading2_consumers">Please Login</string>
+
+
 </resources>

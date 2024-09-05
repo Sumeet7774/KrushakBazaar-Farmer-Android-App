@@ -250,7 +250,7 @@
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/button_1"
-                android:drawableStart="@drawable/baseline_location_on_24"
+                android:drawableStart="@drawable/ic_location_selector"
                 android:drawablePadding="@dimen/_9sdp"
                 android:paddingStart="@dimen/_7sdp"
                 android:paddingEnd="@dimen/_7sdp"
