@@ -42,7 +42,7 @@ public class WalkthroughScreen extends AppCompatActivity {
 
         sessionManagement = new SessionManagement(this);
 
-        if(!sessionManagement.getUserId().isEmpty()) {
+        if (!sessionManagement.getUserId().isEmpty()) {
             Intent intent = new Intent(WalkthroughScreen.this, SplashScreen.class);
             startActivity(intent);
             finish();
@@ -136,16 +136,19 @@ public class WalkthroughScreen extends AppCompatActivity {
         int resultCallPhone = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         int resultCamera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int resultRecordAudio = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
-        int resultInternet = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
+        int resultFineLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int resultCoarseLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int resultExternalStorage =  ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         return resultSendSMS == PackageManager.PERMISSION_GRANTED &&
                 resultReadSMS == PackageManager.PERMISSION_GRANTED &&
                 resultCallPhone == PackageManager.PERMISSION_GRANTED &&
                 resultCamera == PackageManager.PERMISSION_GRANTED &&
                 resultRecordAudio == PackageManager.PERMISSION_GRANTED &&
-                resultInternet == PackageManager.PERMISSION_GRANTED;
+                resultFineLocation == PackageManager.PERMISSION_GRANTED &&
+                resultCoarseLocation == PackageManager.PERMISSION_GRANTED &&
+                resultExternalStorage == PackageManager.PERMISSION_GRANTED;
     }
-
 
     private void requestPermissions() {
         ActivityCompat.requestPermissions(this, new String[]{
@@ -154,6 +157,9 @@ public class WalkthroughScreen extends AppCompatActivity {
                 Manifest.permission.CALL_PHONE,
                 Manifest.permission.CAMERA,
                 Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         }, PERMISSION_REQUEST_CODE);
     }
 
@@ -169,21 +175,27 @@ public class WalkthroughScreen extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length == 5) {
+            if (grantResults.length == 8) {
                 boolean sendSMS = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 boolean readSMS = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                 boolean callPhone = grantResults[2] == PackageManager.PERMISSION_GRANTED;
                 boolean camera = grantResults[3] == PackageManager.PERMISSION_GRANTED;
                 boolean recordAudio = grantResults[4] == PackageManager.PERMISSION_GRANTED;
+                boolean fineLocation = grantResults[5] == PackageManager.PERMISSION_GRANTED;
+                boolean coarseLocation = grantResults[6] == PackageManager.PERMISSION_GRANTED;
+                boolean externalStorage = grantResults[7] == PackageManager.PERMISSION_GRANTED;
 
-                if (sendSMS && readSMS && callPhone && camera && recordAudio) {
+                if (sendSMS && readSMS && callPhone && camera && recordAudio && fineLocation && coarseLocation && externalStorage) {
                     proceedToNextActivity();
                 } else {
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS) ||
                             !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_SMS) ||
                             !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE) ||
                             !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA) ||
-                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
+                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO) ||
+                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION) ||
+                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                            !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         showSettingsDialog();
                     } else {
                         MotionToast.Companion.createColorToast(WalkthroughScreen.this,
@@ -227,7 +239,7 @@ public class WalkthroughScreen extends AppCompatActivity {
     private void proceedToNextActivity() {
         Intent intent = new Intent(WalkthroughScreen.this, IndexPage.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 }

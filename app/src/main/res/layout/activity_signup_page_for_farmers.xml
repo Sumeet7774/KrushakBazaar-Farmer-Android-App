@@ -233,7 +233,7 @@
                 android:textSize="@dimen/_18sdp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/montserrat_semibold"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_below="@+id/phonenumber_edittext_for_farmers"
                 android:layout_width="wrap_content"
@@ -255,6 +255,16 @@
                 android:paddingStart="@dimen/_7sdp"
                 android:paddingEnd="@dimen/_7sdp"
                 android:textSize="@dimen/_14sdp" />
+
+            <ImageButton
+                android:id="@+id/detectlocation_signup_for_farmers"
+                android:src="@drawable/baseline_my_location_24"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_toEndOf="@+id/address_textview"
+                android:layout_above="@+id/address_edittext_for_farmers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/signup_button_signuppage_for_farmers"

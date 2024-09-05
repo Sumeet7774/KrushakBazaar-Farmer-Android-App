@@ -9,6 +9,8 @@ material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.1.4"
 motiontoast = "1.4"
+playServicesLocation = "21.3.0"
+playServicesLocationVersion = "XX.X.X"
 sdpAndroid = "1.1.1"
 volley = "1.2.1"
 
@@ -22,6 +24,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 motiontoast = { module = "com.github.Spikeysanju:MotionToast", version.ref = "motiontoast" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+play-services-location-vxxxx = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocationVersion" }
 sdp-android = { module = "com.intuit.sdp:sdp-android", version.ref = "sdpAndroid" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
 
