@@ -36,4 +36,9 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="enter_your_phone_number">Enter your phone number</string>
 
+    <string name="login_heading0">LOGIN</string>
+    <string name="login_for_government_official">LOGIN FOR GOVERNMENT OFFICIAL</string>
+    <string name="login_for_farmer">LOGIN FOR FARMER</string>
+    <string name="login_for_consumer">LOGIN FOR CONSUMER</string>
+
 </resources>
