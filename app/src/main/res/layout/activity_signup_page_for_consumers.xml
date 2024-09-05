@@ -227,6 +227,35 @@
                 android:paddingEnd="@dimen/_7sdp"
                 android:textSize="@dimen/_14sdp" />
 
+            <TextView
+                android:id="@+id/address_textview"
+                android:text="Address"
+                android:textSize="@dimen/_18sdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_semibold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_below="@+id/phonenumber_edittext_for_consumers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/address_edittext_for_consumers"
+                android:hint="@string/enter_your_address"
+                android:inputType="textPostalAddress"
+                android:fontFamily="@font/poppins_light"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_below="@id/address_textview"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/button_1"
+                android:drawableStart="@drawable/baseline_location_on_24"
+                android:drawablePadding="@dimen/_9sdp"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_7sdp"
+                android:textSize="@dimen/_14sdp" />
+
             <Button
                 android:id="@+id/signup_button_signuppage_for_consumers"
                 android:fontFamily="@font/poppins_bold"
@@ -237,7 +266,7 @@
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/phonenumber_edittext_for_consumers"
+                android:layout_below="@+id/address_edittext_for_consumers"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
