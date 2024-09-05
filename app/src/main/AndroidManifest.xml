@@ -28,6 +28,15 @@
         android:theme="@style/Theme.KrushakBazaar"
         tools:targetApi="31">
         <activity
+            android:name=".LoginPageForConsumer"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPageForFarmer"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPageForGovtOfficial"
+            android:exported="false" />
+        <activity
             android:name=".SignupPageForConsumers"
             android:exported="false" />
         <activity
