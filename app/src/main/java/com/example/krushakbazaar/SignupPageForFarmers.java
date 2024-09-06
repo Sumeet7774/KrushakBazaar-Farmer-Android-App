@@ -1,10 +1,13 @@
 package com.example.krushakbazaar;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -18,6 +21,8 @@ import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +36,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,12 +47,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
@@ -191,7 +203,7 @@ public class SignupPageForFarmers extends AppCompatActivity {
                 String email_txt = emailid_et_farmers.getText().toString().trim();
                 String password_txt = password_et_farmers.getText().toString().trim();
                 String phonenumber_txt = phonenumber_et_farmers.getText().toString().trim();
-                String address_txt = address_et_farmers.getText().toString().trim();
+                String address_txt = address_et_farmers.getText().toString();
 
                 if (TextUtils.isEmpty(username_txt) || TextUtils.isEmpty(email_txt) || TextUtils.isEmpty(password_txt) || TextUtils.isEmpty(phonenumber_txt) || TextUtils.isEmpty(address_txt))
                 {
@@ -258,10 +270,121 @@ public class SignupPageForFarmers extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(SignupPageForFarmers.this, "Successfull", Toast.LENGTH_SHORT).show();
+                    registerUser(username_txt, email_txt, password_txt, phonenumber_txt, address_txt);
                 }
             }
         });
+    }
+
+    private String convertBitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    private void registerUser(String username, String email, String password, String phone_number, String address) {
+        Drawable drawable = profilePhoto_farmer.getDrawable();
+        Bitmap profilePhoto = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            profilePhoto = ((BitmapDrawable) drawable).getBitmap();
+        } else {
+            MotionToast.Companion.createColorToast(SignupPageForFarmers.this,
+                    "Error", "Profile photo is not a valid image.",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(SignupPageForFarmers.this, R.font.montserrat_semibold));
+            return;
+        }
+
+        String profilePhotoBase64 = convertBitmapToBase64(profilePhoto);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiEndpoints.register_url, response -> {
+            Log.d("REQUEST", "Username: " + username);
+            Log.d("REQUEST", "Email: " + email);
+            Log.d("REQUEST", "Password: " + password);
+            Log.d("REQUEST", "Phone Number: " + phone_number);
+            Log.d("REQUEST", "Address: " + address);
+            Log.d("REQUEST", "Profile Photo: " + profilePhotoBase64);
+
+            if (response.contains("registration successfull")) {
+                showRegistrationSuccessDialog();
+            } else if (response.contains("User data already exists")) {
+                MotionToast.Companion.createColorToast(SignupPageForFarmers.this,
+                        "Error", "User with those credentials already Exists!",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(SignupPageForFarmers.this, R.font.montserrat_semibold));
+            } else {
+                MotionToast.Companion.createColorToast(SignupPageForFarmers.this,
+                        "Registration Failed", "Registration Failed!",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(SignupPageForFarmers.this, R.font.montserrat_semibold));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                String errorMessage = volleyError.getMessage();
+                if (errorMessage == null) {
+                    errorMessage = "Unknown error occurred";
+                }
+
+                MotionToast.Companion.createColorToast(SignupPageForFarmers.this,
+                        "Internet Error", "Please check your internet connection",
+                        MotionToastStyle.INFO,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(SignupPageForFarmers.this, R.font.montserrat_semibold));
+
+                Log.d("VOLLEY", errorMessage);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("email_id", email);
+                params.put("password", password);
+                params.put("phone_number", phone_number);
+                params.put("address", address);
+                params.put("profile_photo", profilePhotoBase64);
+                params.put("user_type", "farmer");
+
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    private void showRegistrationSuccessDialog()
+    {
+        Dialog successful_registration_dialogBox = new Dialog(SignupPageForFarmers.this);
+        successful_registration_dialogBox.setContentView(R.layout.custom_success_dialogbox);
+        Button dialogBox_ok_button = successful_registration_dialogBox.findViewById(R.id.okbutton_successDialogBox);
+        dialogBox_ok_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                successful_registration_dialogBox.dismiss();
+                Intent intent = new Intent(SignupPageForFarmers.this, IndexPage.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+            }
+        });
+        successful_registration_dialogBox.show();
+
+        MotionToast.Companion.createColorToast(SignupPageForFarmers.this,
+                "Success", "Press OK to redirect to the Index Page for login.",
+                MotionToastStyle.SUCCESS,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(SignupPageForFarmers.this, R.font.montserrat_semibold));
     }
 
     private void openCamera() {
