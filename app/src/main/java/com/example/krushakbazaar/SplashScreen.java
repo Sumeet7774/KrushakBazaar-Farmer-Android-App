@@ -27,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             String userType = sessionManagement.getUserType();
             Intent intent;
-            if ("Farmer".equals(userType))
+            if ("farmer".equals(userType))
             {
                 intent = new Intent(SplashScreen.this, HomeScreenForFarmers.class);
             }

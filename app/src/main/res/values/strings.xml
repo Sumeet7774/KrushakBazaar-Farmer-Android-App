@@ -57,6 +57,9 @@
     <string name="mobile_number_text">+91 9999999999</string>
     <string name="didn_t_receive_the_otp">Didn\'t receive the OTP?</string>
     <string name="resend_otp">Resend OTP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_listed_product_found">No Listed Product Found</string>
 
 
 </resources>

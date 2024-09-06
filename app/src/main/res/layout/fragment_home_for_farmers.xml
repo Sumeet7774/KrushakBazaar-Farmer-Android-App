@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:focusableInTouchMode="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#508D4E"
+        android:padding="10dp"
+        android:id="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/toolbar_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Home"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:textColor="#EEEEEE"
+            android:textSize="@dimen/_20sdp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_product_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/search_product_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_rounded_corners"
+            android:layout_margin="10dp"
+            android:maxLength="16"
+            android:hint="Search Product"
+            android:padding="10dp"
+            android:elevation="4dp"
+            android:layout_toStartOf="@id/search_user_button" />
+
+        <ImageButton
+            android:id="@+id/search_user_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_search_24"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            android:layout_margin="10dp" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/product_recycleview_farmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_product_layout"
+        android:layout_marginTop="16dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBarLoading_homescreen_farmer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_below="@id/toolbar"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/norproductsfound_farmer_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_below="@id/toolbar"
+        android:visibility="gone"
+        android:text="@string/no_listed_product_found" />
+
+    <FrameLayout
+        android:id="@+id/listedproduct_details_farmer_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:visibility="gone" />
+</RelativeLayout>
