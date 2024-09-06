@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+firebaseBom = "33.2.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -13,8 +14,11 @@ playServicesLocation = "21.3.0"
 playServicesLocationVersion = "XX.X.X"
 sdpAndroid = "1.1.1"
 volley = "1.2.1"
+googleGmsGoogleServices = "4.4.2"
 
 [libraries]
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -31,4 +35,5 @@ volley = { module = "com.android.volley:volley", version.ref = "volley" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 

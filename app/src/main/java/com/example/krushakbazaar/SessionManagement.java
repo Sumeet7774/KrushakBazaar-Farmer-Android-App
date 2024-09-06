@@ -31,6 +31,11 @@ public class SessionManagement {
         return prefs.getString("phone_number", "");
     }
 
+    public String getUserType()
+    {
+        return prefs.getString("user_type","");
+    }
+
     public void setUserId(String userId)
     {
         prefs.edit().putString("user_id", userId).apply();
@@ -51,11 +56,17 @@ public class SessionManagement {
         prefs.edit().putString("phone_number", phoneNumber).apply();
     }
 
+    public void setUserType(String userType)
+    {
+        prefs.edit().putString("user_type", userType).apply();
+    }
+
     public void logout()
     {
         prefs.edit().remove("user_id").apply();
         prefs.edit().remove("username").apply();
         prefs.edit().remove("email_id").apply();
         prefs.edit().remove("phone_number").apply();
+        prefs.edit().remove("user_type").apply();
     }
 }

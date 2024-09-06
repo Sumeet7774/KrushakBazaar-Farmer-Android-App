@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "116273989170",
+    "project_id": "krushak-bazzar-7399a",
+    "storage_bucket": "krushak-bazzar-7399a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116273989170:android:9895cf9788458a83155e2b",
+        "android_client_info": {
+          "package_name": "com.example.krushakbazaar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5uRQLJPNZO3WG3Csj5ocPRWn9Zz_5wPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

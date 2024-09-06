@@ -31,6 +31,18 @@
         android:theme="@style/Theme.KrushakBazaar"
         tools:targetApi="31">
         <activity
+            android:name=".HomeScreenForConsumers"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreenForAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreenForFarmers"
+            android:exported="false" />
+        <activity
+            android:name=".OTP_verification_for_farmers"
+            android:exported="false" />
+        <activity
             android:name=".LoginPageForConsumer"
             android:exported="false" />
         <activity
