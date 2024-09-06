@@ -40,9 +40,6 @@
             android:name=".HomeScreenForFarmers"
             android:exported="false" />
         <activity
-            android:name=".OTP_verification_for_farmers"
-            android:exported="false" />
-        <activity
             android:name=".LoginPageForConsumer"
             android:exported="false" />
         <activity
